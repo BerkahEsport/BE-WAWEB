@@ -28,6 +28,7 @@
       </div>
         <p class="card-text text-shadow">
         Terimakasih Untuk <b>ALLAH S.W.T.</b><br/>Serta junjungan kami nabi Muhammad S.A.W</p>Silahkan di fork dan jangan lupa stars.nya ya bro...<br/>Kalo mau kerjasama membangun ini base boleh...<br/>Saya juga masih pemula & masih belajar.<br/>Semoga base ini bisa bermanfaat.<br/>[🚫ALERT🚫] <br/>Script ini dibuat sendiri dan masih tahap perkembangan. <br/>Bukan sc Recode!!!
+<br/><br/> ©Credit: @moexti
       </div>
     </div>
   </div>
