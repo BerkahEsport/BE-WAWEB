@@ -1,12 +1,12 @@
 let syntaxerror = require("syntax-error");
 let util = require("util");
 
-let handler = async (msg, _2) => {
+let handler = async (m, _2) => {
   let { client, usedPrefix, noPrefix, args, groupMetadata } = _2;
   let _return;
   let _syntax = "";
   let _text = (/^=/.test(usedPrefix) ? "return " : "") + noPrefix;
-  let old = msg.exp * 1;
+  let old = m.exp * 1;
   try {
     let i = 15;
     let f = {
@@ -14,7 +14,7 @@ let handler = async (msg, _2) => {
     };
     let exec = new (async () => {}).constructor(
       "print",
-      "msg",
+      "m",
       "handler",
       "require",
       "client",
@@ -32,9 +32,9 @@ let handler = async (msg, _2) => {
       (...args) => {
         if (--i < 1) return;
         console.log(...args);
-        return msg.reply(util.format(...args));
+        return m.reply(util.format(...args));
       },
-      msg,
+      m,
       handler,
       require,
       client,
@@ -54,8 +54,8 @@ let handler = async (msg, _2) => {
     if (err) _syntax = "```" + err + "```\n\n";
     _return = e;
   } finally {
-    msg.reply(_syntax + util.format(_return));
-    msg.exp = old;
+    m.reply(_syntax + util.format(_return));
+    m.exp = old;
   }
 };
 handler.help = ["> ", "=> "];

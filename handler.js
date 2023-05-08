@@ -1,29 +1,29 @@
 require('./config.js');
 var isNumber = x => typeof x === 'number' && !isNaN(x);
 module.exports = {
-    async handler(msg) {
-        if (!msg) return;
-        let chats = await msg.getChat();
-        let users = await msg.getContact();
+    async handler(m) {
+        if (!m) return;
+        let chats = await m.getChat();
+        let users = await m.getContact();
         try {
 
             // Fungsi Database
             try {
-                let user = global.db.data.users[msg.author || msg.from]
-                if (typeof user !== 'object') global.db.data.users[msg.author || msg.from] = {}
+                let user = global.db.data.users[m.author || m.from]
+                if (typeof user !== 'object') global.db.data.users[m.author || m.from] = {}
                 if (user) {
                     if (!('name' in user)) user.name = users.pushname
-                } else global.db.data.users[msg.author || msg.from] = {
+                } else global.db.data.users[m.author || m.from] = {
                     name: users.pushname
                 }
             } catch (e) {
-                console.log("DatabaseError:", e)
+                console.log("DATABASE RUSAK", e)
             }
 
             // Untuk akses plugins kamu
-            let isGroup = msg.from.endsWith("@g.us");
-            let isROwner = [this.info.me.user, ...global.owner.map(([number]) => number)].map((v) => v?.replace(/[^0-9]/g, "") ).includes((isGroup ? msg.author : msg.from).split("@")[0]);
-            let isOwner = isROwner || msg.fromMe;
+            let isGroup = m.from.endsWith("@g.us");
+            let isROwner = [this.info.me.user, ...global.owner.map(([number]) => number)].map((v) => v?.replace(/[^0-9]/g, "") ).includes((isGroup ? m.author : m.from).split("@")[0]);
+            let isOwner = isROwner || m.fromMe;
 
             let groupMetadata = isGroup ? chats.groupMetadata : {};
             let participants = isGroup ? groupMetadata.participants : [];
@@ -43,26 +43,26 @@ module.exports = {
               let _prefix = plugin.customPrefix ? plugin.customPrefix : client.prefix ? client.prefix : global.prefix;
               let match = (
                 _prefix instanceof RegExp // RegExp Mode?
-                    ? [[_prefix.exec(msg.body), _prefix]]
+                    ? [[_prefix.exec(m.body), _prefix]]
                     : Array.isArray(_prefix) // Array?
                     ? _prefix.map((p) => {
                         let re =
                         p instanceof RegExp // RegExp in Array?
                           ? p
                           : new RegExp(str2Regex(p));
-                        return [re.exec(msg.body), re];
+                        return [re.exec(m.body), re];
                     })
                     : typeof _prefix === "string" // String?
                     ? [
                       [
-                        new RegExp(str2Regex(_prefix)).exec(msg.body),
+                        new RegExp(str2Regex(_prefix)).exec(m.body),
                         new RegExp(str2Regex(_prefix)),
                       ],
                     ]
                     : [[[], new RegExp()]]
                 ).find((p) => p[1]);
                 if ((usedPrefix = (match[0] || "")[0])) {
-                let noPrefix = msg.body.replace(usedPrefix, "");
+                let noPrefix = m.body.replace(usedPrefix, "");
                 let [command, ...args] = noPrefix.trim().split` `.filter((v) => v);
                 args = args || [];
                 let _args = noPrefix.trim().split` `.slice(1);
@@ -82,30 +82,30 @@ module.exports = {
                     : false;
         
                 if (!isAccept) continue;
-                msg.plugin = name;
+                m.plugin = name;
       
                 // Fungsi untuk pengecualian akses plugin cmd
                 if (plugin.rowner && !isROwner) {
-                    msg.reply("This command can only executed by the real owner!")
+                    m.reply("This command can only executed by the real owner!")
                     continue;
                 }
                 if (plugin.owner && !isOwner) {
-                    msg.reply("This command can only executed by the owner.")
+                    m.reply("This command can only executed by the owner.")
                     continue;
                 }
                 if (plugin.admin && !isAdmin) {
-                    msg.reply("This command can only executed by the administrators.");
+                    m.reply("This command can only executed by the administrators.");
                     continue;
                 }
                 if (plugin.botAdmin && !isBotAdmin) {
-                    msg.reply("Make sure bot is admin before executing this command!");
+                    m.reply("Make sure bot is admin before executing this command!");
                     continue;
                 }
                 if (plugin.private && isGroup) {
-                    msg.reply("This commnd can only executed on private chat.")
+                    m.reply("This commnd can only executed on private chat.")
                 }
       
-                msg.isCommand = true;
+                m.isCommand = true;
                 let extra = {
                     match,
                     usedPrefix,
@@ -115,13 +115,13 @@ module.exports = {
                     command,
                     text,
                     client: this,
-                    msg,
+                    m,
                     users,
                     isGroup,
                     isAdmin
                 };
                 try {
-                    await plugin.call(this, msg, extra);
+                    await plugin.call(this, m, extra);
                 } catch (e) {
                     console.log(e);
                 }
@@ -129,7 +129,7 @@ module.exports = {
             }
         } finally {
             // Hasil dilihat pada console.log
-            require("./lib/print")(this, msg).catch((e) => console.log(e));
+            require("./lib/print")(this, m).catch((e) => console.log(e));
         }
     }
 }

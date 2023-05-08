@@ -13,12 +13,12 @@ const logger = require('pino')({
             translateTime: true,
         }
     }
-}).child({ creator: "xyzuniverse" });
+}).child({author: `@moexti`});
 
-// Prevent to crash if error occured
+//Jika terjadi error
 process.on("uncaughtException", console.error);
 
-// Plugin loader
+// Membuka PLUGINS
 const pluginFolder = path.join(__dirname, "plugins");
 const pluginFilter = fs
   .readdirSync(pluginFolder, { withFileTypes: true })
@@ -42,7 +42,7 @@ pluginFilter.map(async ({ name }) => {
     }
   }
 });
-logger.info("All plugins has been loaded.");
+logger.info("Berhasil memuat semua plugins.");
 
 global.reload = async (_event, filename) => {
   if (pluginFile(filename)) {
@@ -53,15 +53,15 @@ global.reload = async (_event, filename) => {
         if (dir in require.cache) {
           delete require.cache[dir];
           if (fs.existsSync(dir))
-            logger.info(`re - require plugin '${filename}'`);
+            logger.info(`- Perubahan plugin '${filename}'`);
           else {
-            logger.warn(`deleted plugin '${filename}'`);
+            logger.warn(`- Menghapus plugin '${filename}'`);
             return delete global.plugins[filename];
           }
-        } else logger.info(`requiring new plugin '${filename}'`);
+        } else logger.info(`- Menambah plugin '${filename}'`);
         let err = syntaxerror(fs.readFileSync(dir), filename);
         if (err)
-          logger.error(`syntax error while loading '${filename}'\n${err}`);
+          logger.error(`Sintax error ketika dimuat '${filename}'\n${err}`);
         else
           try {
             global.plugins[filename] = require(dir);
@@ -80,10 +80,10 @@ global.reload = async (_event, filename) => {
 };
 Object.freeze(global.reload);
 
-// Bot prefix
+// <----- Prefix BOT ----->>
 global.prefix = new RegExp("^[" + "‎xzXZ/i!#$%+£¢€¥^°=¶∆×÷π√✓©®:;?&.\\-".replace(/[|\\{}()[\]^$+*?.\-\^]/g, "\\$&") + "]");
 
-// Database
+// <----- DATABASE BOT ----->>
 var low
 try {
   low = require('lowdb');
@@ -103,30 +103,30 @@ async function ClientConnect() {
         }
     });
 
-    // Webloading event
+    // <----- Menghubungkan koneksi WAWEB ----->
     client.on('loading_screen', (percent) => {
-        logger.info(`Connecting, loading web... Status: ${percent}%`);
+        logger.info(`Mengubungkan, membuka situs... Berjalan: ${percent}%`);
     });
 
-    // QR event
+    // <----- Membuat QR untuk di scan Perangkat tertaut ----->
     client.on('qr', qr => {
         QRCode.generate(qr, { small: true });
-        logger.info("Scan QR code to continue.");
+        logger.info("Scan QR Code dibawah ini agar terhubung ke WaWeb...");
     });
 
-    // Tell the user if client is ready
+    // <----- BOT sudah terhubung ke Whatsapp ----->
     client.on('ready', async () => {
         if (global.db.data == null) await loadDatabase();
-        logger.info("Opened connection to WA Web")
-        logger.info("Client bot is ready!");
+        logger.info("Membuka koneksi ke WaWeb...")
+        logger.info("Klien bot sudah siap!!");
     });
 
-    // Message event
+    // <----- Penghubung pesan fitur PLUGINS ----->
     client.on('message', require('./handler').handler.bind(client));
 
-    // Initialize the client
+    // <----- Menginisiasi Whatsapp ke BOT ----->
     client.initialize();
-    logger.info("Connecting to WA Web")
+    logger.info("Mencoba koneski ke WaWeb...")
 
     return client;
 

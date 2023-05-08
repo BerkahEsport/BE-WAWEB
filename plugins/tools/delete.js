@@ -1,13 +1,13 @@
-let handler = async (msg, { client, text, isAdmin, isGroup }) => {
-    if (!msg.hasQuotedMsg) {
-        msg.react('⚠️');
-        return msg.reply('Reply pesan bot untuk menghapus pesan!')
-    } else if (msg.hasQuotedMsg) {
-        var q = await msg.getQuotedMessage();
+let handler = async (m, { client, text, isAdmin, isGroup }) => {
+    if (!m.hasQuotedm) {
+        m.react('⚠️');
+        return m.reply('Reply pesan bot untuk menghapus pesan!')
+    } else if (m.hasQuotedm) {
+        var q = await m.getQuotedMessage();
         if (q.fromMe || isGroup && isAdmin) q.delete(true); 
         else {
-            msg.react("⚠️");
-            return msg.reply("Maaf, saya hanya bisa menghapus pesan saya sendiri atau hapus pesan orang lain dalam grup apabila saya admin.")
+            m.react("⚠️");
+            return m.reply("Maaf, saya hanya bisa menghapus pesan saya sendiri atau hapus pesan orang lain dalam grup apabila saya admin.")
         }
     }
 }

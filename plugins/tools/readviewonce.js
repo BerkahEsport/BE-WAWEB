@@ -1,20 +1,20 @@
-let handler = async (msg, { client, text }) => {
-    if (!msg.hasQuotedMsg) return msg.reply("Reply a view-onced message!")
-    let q = await msg.getQuotedMessage();
+let handler = async (m, { client, text }) => {
+    if (!m.hasQuotedm) return m.reply("Reply a view-onced message!")
+    let q = await m.getQuotedMessage();
     if (q.hasMedia && q._data.isViewOnce) {
-        msg.react("⏳");
+        m.react("⏳");
         let media = await q.downloadMedia();
         if (media) {
-            msg.react("✅");
-            return msg.reply(media, null);
+            m.react("✅");
+            return m.reply(media, null);
         } else {
-            msg.react("⚠️");
-            return msg.reply("Getting media failed! Please try again.");
+            m.react("⚠️");
+            return m.reply("Getting media failed! Please try again.");
         }
-    } else return msg.reply("This is not a view-once message!");
+    } else return m.reply("This is not a view-once message!");
 };
 
-handler.help = ['readviewonce <reply msg with viewoncemessage>'];
+handler.help = ['readviewonce <reply m with viewoncemessage>'];
 handler.tags = ['tools'];
 
 handler.command = /^(readviewonce)$/i
