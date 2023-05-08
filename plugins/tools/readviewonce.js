@@ -1,4 +1,4 @@
-let handler = async (m, { client, text }) => {
+let handler = async (m, { conn, text }) => {
     if (!m.hasQuotedm) return m.reply("Reply a view-onced message!")
     let q = await m.getQuotedMessage();
     if (q.hasMedia && q._data.isViewOnce) {

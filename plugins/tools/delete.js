@@ -1,4 +1,4 @@
-let handler = async (m, { client, text, isAdmin, isGroup }) => {
+let handler = async (m, { conn, text, isAdmin, isGroup }) => {
     if (!m.hasQuotedm) {
         m.react('⚠️');
         return m.reply('Reply pesan bot untuk menghapus pesan!')

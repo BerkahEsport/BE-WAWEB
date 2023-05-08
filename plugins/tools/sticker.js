@@ -1,4 +1,4 @@
-let handler = async (m, { client, text, command }) => {
+let handler = async (m, { conn, text, command }) => {
     let packname = text.split('|')[0] ? text.split('|')[0] : global.sticker.packname
     let author = text.split('|')[1] ? text.split('|')[1] : global.sticker.author
     let q = m.hasQuotedm ? await m.getQuotedMessage() : m

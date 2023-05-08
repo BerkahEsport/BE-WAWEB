@@ -1,2 +1,3 @@
-2023/05/08-12:37:32.730 2724 Creating DB C:\Users\azizunniza\Downloads\BE-WAWEB\.wwebjs_auth\session\Default\Platform Notifications since it was missing.
-2023/05/08-12:37:32.741 2724 Reusing MANIFEST C:\Users\azizunniza\Downloads\BE-WAWEB\.wwebjs_auth\session\Default\Platform Notifications/MANIFEST-000001
+2023/05/08-15:42:23.531 2b94 Reusing MANIFEST C:\Users\azizunniza\Downloads\BE-WAWEB\.wwebjs_auth\session\Default\Platform Notifications/MANIFEST-000001
+2023/05/08-15:42:23.532 2b94 Recovering log #3
+2023/05/08-15:42:23.533 2b94 Reusing old log C:\Users\azizunniza\Downloads\BE-WAWEB\.wwebjs_auth\session\Default\Platform Notifications/000003.log 

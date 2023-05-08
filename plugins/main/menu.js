@@ -26,7 +26,7 @@ const defaultMenu = {
 *%npmname* | %version
 ${'```%npmdesc```'}
 `}
-let handler = async (m, { client, usedPrefix: _p, users }) => {
+let handler = async (m, { conn, usedPrefix: _p, users }) => {
   try {
     let package = JSON.parse(await fs.promises.readFile(path.join(__dirname, '../../package.json')).catch(_ => '{}'))
     let name = users.pushname
@@ -74,12 +74,12 @@ let handler = async (m, { client, usedPrefix: _p, users }) => {
       if (plugin && 'tags' in plugin)
         for (let tag of plugin.tags)
           if (!(tag in tags) && tag) tags[tag] = tag
-    client.menu = client.menu ? client.menu : {}
-    let before = client.menu.before || defaultMenu.before
-    let header = client.menu.header || defaultMenu.header
-    let body = client.menu.body || defaultMenu.body
-    let footer = client.menu.footer || defaultMenu.footer
-    let after = client.menu.after || defaultMenu.after
+    conn.menu = conn.menu ? conn.menu : {}
+    let before = conn.menu.before || defaultMenu.before
+    let header = conn.menu.header || defaultMenu.header
+    let body = conn.menu.body || defaultMenu.body
+    let footer = conn.menu.footer || defaultMenu.footer
+    let after = conn.menu.after || defaultMenu.after
     let _text = [
       before,
       ...Object.keys(tags).map(tag => {
@@ -87,7 +87,9 @@ let handler = async (m, { client, usedPrefix: _p, users }) => {
           ...help.filter(menu => menu.tags && menu.tags.includes(tag) && menu.help).map(menu => {
             return menu.help.map(help => {
               return body.replace(/%cmd/g, menu.prefix ? help : '%p' + help)
-                .trim()
+              .replace(/%islimit/g, menu.limit ? '*(ʟɪᴍɪᴛ)*' : '')
+              .replace(/%isPremium/g, menu.premium ? '*(ᴘʀᴇᴍɪᴜᴍ)*' : '')
+              .trim()
             }).join('\n')
           }),
           footer
@@ -95,11 +97,11 @@ let handler = async (m, { client, usedPrefix: _p, users }) => {
       }),
       after
     ].join('\n')
-    text = typeof client.menu == 'string' ? client.menu : typeof client.menu == 'object' ? _text : ''
+    text = typeof conn.menu == 'string' ? conn.menu : typeof conn.menu == 'object' ? _text : ''
     let replace = {
       '%': '%',
       p: _p, uptime, muptime,
-      me: client.info.pushname,
+      me: conn.info.pushname,
       npmname: package.name,
       npmdesc: package.description,
       version: package.version,
