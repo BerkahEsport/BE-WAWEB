@@ -27,7 +27,14 @@
         <img src="https://i.ibb.co/VQQ68JS/berkahesport.jpg" class="rounded-circle shadow mb-3" alt="Space" width="150px" height="150px">
       </div>
         <p class="card-text text-shadow">
-        Terimakasih Untuk <b>ALLAH S.W.T.</b><br/>Serta junjungan kami nabi Muhammad S.A.W</p>Silahkan di fork dan jangan lupa stars.nya ya bro...<br/>Kalo mau kerjasama membangun ini base boleh...<br/>Saya juga masih pemula & masih belajar.<br/>Semoga base ini bisa bermanfaat.<br/>[🚫ALERT🚫] <br/>Script ini dibuat sendiri dan masih tahap perkembangan. <br/>Bukan sc Recode!!!
+        Terimakasih Untuk <b>ALLAH S.W.T.</b><br/>Serta junjungan kami nabi Muhammad S.A.W</p>
+WhatsappBOT ini menggunakan whatsapp-web.js bukan Baileys.
+<br/>Silahkan di fork dan jangan lupa stars.nya ya bro...
+<br/>Kalo mau kerjasama membangun ini base boleh...
+<br/>Saya juga masih pemula & masih belajar.
+<br/>Semoga base ini bisa bermanfaat.
+<br/>[🚫ALERT🚫] 
+<br/>Script ini dibuat sendiri dan masih tahap perkembangan. <br/>Bukan sc Recode!!!
 <br/><br/> ©Credit: @moexti
       </div>
     </div>
