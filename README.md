@@ -21,7 +21,7 @@
   </nav>
   <div class="container-fluid">
     <div class="card m-3 text-center shadow">
-      <h2 class="card-header shadow-sm bg-primary text-white">About This Web</h2>
+      <h2 class="card-header shadow-sm bg-primary text-white">BERKAHESPORT.ID OFFICIAL</h2>
       <div class="card-body">
       <div class="text-center">
         <img src="https://i.ibb.co/VQQ68JS/berkahesport.jpg" class="rounded-circle shadow mb-3" alt="Space" width="150px" height="150px">
