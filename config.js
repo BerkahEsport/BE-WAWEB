@@ -1,5 +1,5 @@
 global.owner = [
-    // [number, name, isDev?]
+    // [nomor kamu, nama kamu, developer bukan?]
     ["62895375950107", "berkahesport", true],
 ]
 
