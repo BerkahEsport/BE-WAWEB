@@ -1,3 +1,15 @@
+// <----- BERKAHESPORT.ID OFC ----->>
+/* Whatsapp bot versi WAWEB ini mohon digunakan dengan bijak
+Terimakasih Untuk ALLAH S.W.T.
+Serta junjungan kami nabi Muhammad S.A.W
+
+Base created by @moexti 08 Mei 2023
+- Silahkan tambah disini bro...
+-
+-
+
+Jangan ubah yak mending ditambah... ^_^
+*/
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const QRCode = require('qrcode-terminal');
 const fs = require('fs');
@@ -11,9 +23,7 @@ const logger = require('pino')({
             levelFirst: true,
             ignore: "hostname",
             translateTime: true,
-        }
-    }
-}).child({author: `@moexti`});
+        }}}).child({author: `@moexti`});
 
 //Jika terjadi error
 process.on("uncaughtException", console.error);
