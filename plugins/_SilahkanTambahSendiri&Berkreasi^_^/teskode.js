@@ -7,6 +7,6 @@ let handler = async (m, { conn, text }) => {
     }
     handler.command = ['']
     handler.tags = ['']
-    handler.command = /^(bbb)$/i
+    handler.command = /^(tes)$/i
     handler.register = true
     module.exports = handler
