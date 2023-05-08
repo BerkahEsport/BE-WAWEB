@@ -1,10 +1,3 @@
-# BE-WAWEB
-
-
-https://wa.me/62895375950107?text=Halo+bang+boleh+gabung?
-
-
-
 <!DOCTYPE html>
 <html lang="id">
   <head>
@@ -16,7 +9,7 @@ https://wa.me/62895375950107?text=Halo+bang+boleh+gabung?
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <base target="_blank"/>
     <div class="container">
-      <a class="navbar-brand fw-bold" href="http://api-be.vercel.app">API - BERKAHESPORT</a>
+      <a class="navbar-brand fw-bold" href="https://wa.me/62895375950107">Chat OWNER</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -34,7 +27,7 @@ https://wa.me/62895375950107?text=Halo+bang+boleh+gabung?
         <img src="https://i.ibb.co/VQQ68JS/berkahesport.jpg" class="rounded-circle shadow mb-3" alt="Space" width="150px" height="150px">
       </div>
         <p class="card-text text-shadow">
-        Terimakasih Untuk <b>ALLAH S.W.T.</b><br/>Serta junjungan kami nabi Muhammad S.A.W</p>Silahkan di fork dan jangan lupa stars.nya ya bro...<br/>Kalo mau kerjasama membangun ini base boleh...<br/>Saya juga masih pemula.<br/>Masih belajar tentang programming.<br/>Semoga base ini bisa bermanfaat.
+        Terimakasih Untuk <b>ALLAH S.W.T.</b><br/>Serta junjungan kami nabi Muhammad S.A.W</p>Silahkan di fork dan jangan lupa stars.nya ya bro...<br/>Kalo mau kerjasama membangun ini base boleh...<br/>Saya juga masih pemula.<br/>Masih belajar tentang programming.<br/>Semoga base ini bisa bermanfaat.<br/>[🚫ALERT🚫] Jangan bilang ini sc Recode!!!
       </div>
     </div>
   </div>
