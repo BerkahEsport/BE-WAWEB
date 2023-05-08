@@ -1,4 +1,4 @@
-let handler = async (m, { conn, text, command }) => {
+let handler = async (m, { text }) => {
     let packname = text.split('|')[0] ? text.split('|')[0] : global.sticker.packname
     let author = text.split('|')[1] ? text.split('|')[1] : global.sticker.author
     let q = m.hasQuotedm ? await m.getQuotedMessage() : m
@@ -11,12 +11,12 @@ let handler = async (m, { conn, text, command }) => {
             await m.reply(media, undefined, { sendMediaAsSticker: true, stickerName: packname, stickerAuthor: author });
         } else {
             m.react("⚠️");
-            m.reply("Conversion into sticker failed, please try again or report to owner for fixing it.");
+            m.reply("Gagal, silahkan hubungi owner..!");
         }   
     }
 }
 
-handler.help = ['stiker (caption|reply media)', 'stikergif (caption|reply media)']
+handler.help = ['stiker [media]', 'stikergif [media]']
 handler.tags = ['tools']
 handler.command = /^s(tic?ker)?(gif)?$/i
 module.exports = handler

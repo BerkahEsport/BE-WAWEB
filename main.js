@@ -23,7 +23,7 @@ const logger = require('pino')({
             levelFirst: true,
             ignore: "hostname",
             translateTime: true,
-        }}}).child({author: `@moexti`});
+        }}}).child({});
 
 //Jika terjadi error
 process.on("uncaughtException", console.error);
@@ -121,7 +121,7 @@ async function ClientConnect() {
     // <----- Membuat QR untuk di scan Perangkat tertaut ----->
     conn.on('qr', qr => {
         QRCode.generate(qr, { small: true });
-        logger.info("Scan QR Code dibawah ini agar terhubung ke WaWeb...");
+        logger.info("Scan QR Code di atas agar terhubung ke WaWeb...");
     });
 
     // <----- BOT sudah terhubung ke Whatsapp ----->

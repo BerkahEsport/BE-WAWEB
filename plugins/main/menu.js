@@ -1,10 +1,10 @@
 let fs = require('fs')
 let path = require('path')
 let tags = {
-  'main': 'Main',
-  'tools': "Tools",
-  'advanced': 'Advanced',
-  '': 'No Category',
+  'main': 'MENU UTAMA',
+  'tools': "PERALATAN",
+  'advanced': 'LANJUTAN',
+  '': 'LAIN = LAIN',
 }
 const defaultMenu = {
   before: `

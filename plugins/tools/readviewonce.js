@@ -14,7 +14,7 @@ let handler = async (m, { conn, text }) => {
     } else return m.reply("This is not a view-once message!");
 };
 
-handler.help = ['readviewonce <reply m with viewoncemessage>'];
+handler.help = ['readviewonce [balasan pesan]'];
 handler.tags = ['tools'];
 
 handler.command = /^(readviewonce)$/i

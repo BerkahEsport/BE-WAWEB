@@ -12,7 +12,7 @@ let handler = async (m, { conn, text, isAdmin, isGroup }) => {
     }
 }
 
-handler.help = ['delete <reply message>', 'del <reply message>']
+handler.help = ['delete [pesan balasan]']
 handler.tags = ['tools']
 handler.command = /^del(ete)?$/i
 
