@@ -21,3 +21,6 @@ handler.command = /^sf$/i
 handler.rowner = true
 
 module.exports = handler 
+
+// <===== Buat nambahin plugin lewat chat BOT =====>
+// Credit @moexti
