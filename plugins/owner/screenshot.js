@@ -15,3 +15,5 @@ handler.command = /^(screenshot|ss)wa$/i
 handler.owner = true
 
 module.exports = handler;
+
+// Sudah fix ganti module file-type (diturunin versinya)
