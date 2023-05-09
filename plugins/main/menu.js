@@ -2,9 +2,13 @@ let fs = require('fs')
 let path = require('path')
 let tags = {
   'main': 'MENU UTAMA',
+  'anime': 'ANIME',
+  'group': 'GROUP',
+  'info': 'INFO',
   'tools': "PERALATAN",
   'advanced': 'LANJUTAN',
   '': 'LAIN = LAIN',
+
 }
 const defaultMenu = {
   before: `

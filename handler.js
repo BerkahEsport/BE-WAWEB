@@ -1,6 +1,9 @@
 require('./config.js');
+let simple = require('./lib/simple')
 let fs = require('fs')
 const chalk = require('chalk');
+const pkg = require('whatsapp-web.js')
+const { MessageMedia } = pkg
 var isNumber = x => typeof x === 'number' && !isNaN(x);
 module.exports = {
     async handler(m) {
@@ -130,11 +133,15 @@ module.exports = {
                     fail('owner', m, conn)
                     continue;
                 }
-                if (plugin.admin && !isAdmin) {
+                if (plugin.group && !isGroup) {
+                    fail("group", m, conn);
+                    continue;
+                  } 
+                else if (plugin.admin && !isAdmin) {
                     fail('admin', m, conn)
                     continue;
-                }
-                if (plugin.botAdmin && !isBotAdmin) {
+                  } 
+                else if (plugin.botAdmin && !isBotAdmin) {
                     fail('botAdmin', m, conn)
                     continue;
                 }
@@ -173,7 +180,7 @@ module.exports = {
 
 
 global.dfail = (type, m, conn) => {
-    //let gambar = fs.readFileSync(`./src/access_ditolak.jpg`)
+    //let gambar =  MessageMedia.fromUrl(akses_ditolak)
     let msg = {
       rowner: "*𝕂ℍ𝕌𝕊𝕌𝕊 𝔻𝔼𝕍𝔼𝕃𝕆ℙ𝔼ℝ* • ᴄᴏᴍᴍᴀɴᴅ ɪɴɪ ʜᴀɴʏᴀ ᴜɴᴛᴜᴋ ᴅᴇᴠᴇʟᴏᴘᴇʀ ʙᴏᴛ",
       owner: "*𝕂ℍ𝕌𝕊𝕌𝕊 𝕆𝕎ℕ𝔼ℝ* • ᴄᴏᴍᴍᴀɴᴅ ɪɴɪ ʜᴀɴʏᴀ ᴜɴᴛᴜᴋ ᴏᴡɴᴇʀ ʙᴏᴛ",
@@ -187,9 +194,17 @@ global.dfail = (type, m, conn) => {
       nsfw: `*ℙ𝔸ℝ𝔸ℍ 𝕃𝕌!!!* • ɴᴀᴋ ᴋᴀᴍᴜ ʙᴇʟᴜᴍ ᴄᴜᴋᴜᴘ ᴜᴍᴜʀ. ᴊᴀɴɢᴀɴ ᴍᴀᴋꜱᴀ!!!`,
       text: `*𝕋𝔼𝕂𝕊 𝕃𝕀𝕄𝕀𝕋𝔼𝔻* • ᴛᴇᴋꜱ ʏᴀɴɢ ᴋᴀᴍᴜ ᴍᴀꜱᴜᴋᴋᴀɴ ᴛᴇʀʟᴀʟᴜ ʙᴀɴʏᴀᴋ! ᴍᴀᴋꜱ. 1500 ᴋᴀʀᴀᴋᴛᴇʀ. ` 
     }[type];
-    if (msg) return conn.sendMessage(m.from,  msg
-  )}
+    if (msg) return conn.sendMessage(m.from, msg) //conn.sendMessage(m.from,  gambar, {caption: msg})
+  }
 
+// Jangan dihapus nanti kodingan di disini ga bisa update realtime ketika di save.
+let file = require.resolve(__filename)
+fs.watchFile(file, () => {
+  fs.unwatchFile(file)
+  console.log(chalk.redBright("Update 'handler.js'"))
+  delete require.cache[file]
+  require(file)
+})
   // <----- BERKAHESPORT.ID OFC ----->>
 /* Whatsapp bot versi WAWEB ini mohon digunakan dengan bijak
 Terimakasih Untuk ALLAH S.W.T.

@@ -12,7 +12,7 @@ global.ty = '💭 ɪɴɪ ʜᴀꜱɪʟɴʏᴀ... \nᴊᴀɴɢᴀɴ ʟᴜᴘᴀ �
 /*============== LOGO ==============*/
 global.thumb = 'https://telegra.ph/file/47b3652155f158b931bda.jpg' //Main Thumbnail
 global.imagebot = 'https://raw.githubusercontent.com/BerkahEsport/api-be/main/tmp/gmbr/logo2.png' //Logo BE
-
+global.akses_ditolak = 'https://raw.githubusercontent.com/BerkahEsport/api-be/main/src/access_ditolak.jpg' // Gambar ketika akses dibatasi
 /*============== TEXT ==============*/
 global.wait = '```「▰▰▰▰▱▱▱▱▱▱」Loading...```'
 global.waits = ['```「▰▱▱▱▱▱▱▱▱▱」Loading...```','```「▰▰▱▱▱▱▱▱▱▱」Loading...```','```「▰▰▰▱▱▱▱▱▱▱」Loading...```','```「▰▰▰▰▱▱▱▱▱▱」Loading...```','```「▰▰▰▰▰▱▱▱▱▱」Loading...```']
