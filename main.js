@@ -128,7 +128,7 @@ async function ClientConnect() {
     conn.on('ready', async () => {
         if (global.db.data == null) await loadDatabase();
         logger.info("Klien bot sudah siap!!"); // Code dibawah buat info bot ini berjalan sukses...
-        await conn.sendMessage("62895371549895@c.us", `${JSON.stringify(conn.info)}`)
+        await conn.sendMessage("62895375950107@c.us", `${JSON.stringify(conn.info)}`)
     });
 
     // <----- Penghubung pesan fitur PLUGINS ----->
