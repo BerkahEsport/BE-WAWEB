@@ -18,8 +18,10 @@ global.wait = '```「▰▰▰▰▱▱▱▱▱▱」Loading...```'
 global.waits = ['```「▰▱▱▱▱▱▱▱▱▱」Loading...```','```「▰▰▱▱▱▱▱▱▱▱」Loading...```','```「▰▰▰▱▱▱▱▱▱▱」Loading...```','```「▰▰▰▰▱▱▱▱▱▱」Loading...```','```「▰▰▰▰▰▱▱▱▱▱」Loading...```']
 global.eror = '```404 error```'
 
-
-
+/*============== GROUPS ==============*/
+global.gcofc = 'https://chat.whatsapp.com/JKdIWr5fj990Ux2oqTjTo5' // GC resmi BERKAHESPORT.ID OFC
+global.rpg = 'https://chat.whatsapp.com/CxIlUZlW3lD7eH4LLLWYoZ' // GC untuk main Game RPG
+global.rpg2 = 'https://chat.whatsapp.com/C4Qax9BYH9Q2DbFeRQRmRD' // GC untuk main Game RPG 2
 
 global.owner = [
     // [nomor kamu, nama kamu, developer bukan?]
