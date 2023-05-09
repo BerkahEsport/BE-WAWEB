@@ -1,5 +1,4 @@
 require('./config.js');
-let simple = require('./lib/simple')
 let fs = require('fs')
 const chalk = require('chalk');
 const pkg = require('whatsapp-web.js')

@@ -6,6 +6,7 @@ let tags = {
   'group': 'GROUP',
   'info': 'INFO',
   'tools': "PERALATAN",
+  'owner': 'OWNER BOT',
   'advanced': 'LANJUTAN',
   '': 'LAIN = LAIN',
 
