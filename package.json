@@ -9,13 +9,15 @@
   },
   "keywords": [
     "BE-WAWEB",
-    "whatsapp-web.js"],
+    "whatsapp-web.js"
+  ],
   "author": "@moexti",
   "license": "ISC",
   "dependencies": {
     "awesome-phonenumber": "^5.6.0",
     "axios": "^1.4.0",
     "chalk": "^4.1.1",
+    "file-type": "^18.3.0",
     "lodash": "^4.17.21",
     "lowdb": "^2.1.0",
     "node-fetch": "^2.6.1",
