@@ -90,10 +90,11 @@ global.reload = async (_event, filename) => {
 };
 Object.freeze(global.reload);
 
-// <----- Prefix BOT ----->>
+// <----- Prefix BOT ----->
 global.prefix = new RegExp("^[" + "‎xzXZ/i!#$%+£¢€¥^°=¶∆×÷π√✓©®:;?&.\\-".replace(/[|\\{}()[\]^$+*?.\-\^]/g, "\\$&") + "]");
 
-// <----- DATABASE BOT ----->>
+
+// <----- DATABASE BOT ----->
 var low
 try {
   low = require('lowdb');
@@ -112,6 +113,14 @@ async function ClientConnect() {
             args: ["--no-sandbox", "--disable-gpu"]
         }
     });
+/*    <===== KALO MAKE PANEL GANTI DIBAWAH INI PADA KODINGAN puppeter =====>
+puppeteer: {
+          args: ['--no-sandbox'],
+                  executablePath: platform() === 'win32' ? 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe' : '/usr/bin/google-chrome-stable'
+                      },
+                          userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 13_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15'
+                          });
+                          */
 
     // <----- Menghubungkan koneksi WAWEB ----->
     conn.on('loading_screen', (percent) => {

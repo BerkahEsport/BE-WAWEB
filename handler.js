@@ -1,5 +1,6 @@
 require('./config.js');
 let fs = require('fs')
+let { format } = require('util')
 const chalk = require('chalk');
 const pkg = require('whatsapp-web.js')
 const { MessageMedia } = pkg
@@ -20,8 +21,8 @@ module.exports = {
                         if (!('name' in user)) user.name = users.pushname
                         if (!isNumber(user.age)) user.age = -1;
                         if (!isNumber(user.regTime)) user.regTime = -1;
+                        if (!("premium" in user)) user.premium = false;
                   }
-                    if (!("premium" in user)) user.premium = false;
                     if (!"banned" in user) user.banned = false;
                     if (!"mute" in user) user.mute = false;
                     if (!"afkReason" in user) user.afkReason = "";
@@ -71,7 +72,7 @@ module.exports = {
             let AdminFilter = isGroup ? participants.filter(v => v.isAdmin).map(v => v.id.user) : '';
             let isAdmin = isGroup ? AdminFilter.map(v => v.replace(/[^0-9]/g, '') + '@c.us').includes(m.author ? m.author : m.from) : '';
             let isBotAdmin = isGroup ? AdminFilter.map(v => v.replace(/[^0-9]/g, '') + '@c.us').includes(conn.info.me._serialized) : '';
-
+            const isPrems = isROwner || global.db.data.users[m.author || m.from].premium == true
             // Untuk menjalankan plugin prefix dan cmd kamu
             let usedPrefix;
             for (let name in global.plugins) {
@@ -99,6 +100,24 @@ module.exports = {
                     ]
                     : [[[], new RegExp()]]
                 ).find((p) => p[1]);
+                if (typeof plugin.before === 'function') {
+                    if (await plugin.before.call(this, m, {
+                        match,
+                        conn: this,
+                        participants,
+                        isROwner,
+                        isOwner,
+                        isAdmin,
+                        isBotAdmin,
+                        isPrems,
+                        m,
+                        __dirname: ___dirname,
+                        __filename
+                    }))
+                        continue
+                }
+                if (typeof plugin !== 'function') continue
+
                 if ((usedPrefix = (match[0] || "")[0])) {
                 let noPrefix = m.body.replace(usedPrefix, "");
                 let [command, ...args] = noPrefix.trim().split` `.filter((v) => v);
@@ -132,6 +151,10 @@ module.exports = {
                     fail('owner', m, conn)
                     continue;
                 }
+                if (plugin.premium && !isPrems) { // Premium
+                    fail('premium', m, this)
+                    continue
+                }
                 if (plugin.group && !isGroup) {
                     fail("group", m, conn);
                     continue;
@@ -146,9 +169,18 @@ module.exports = {
                 }
                 if (plugin.private && isGroup) {
                     fail('private', m, conn)
+                    continue;
                 }
       
                 m.isCommand = true;
+                let xp = 'exp' in plugin ? parseInt(plugin.exp) : 3 // XP Earning per command
+                if (xp > 200)
+                    m.reply('ɴɢᴇᴄɪᴛ -_-') // Hehehe
+                else
+                    m.exp += xp
+                if (!isPrems && plugin.limit && global.db.data.users[m.author || m.from].limit < plugin.limit * 1) {
+                    this.reply(m.chat, `[❗] ʟɪᴍɪᴛ ᴀɴᴅᴀ ʜᴀʙɪꜱ, ꜱɪʟᴀʜᴋᴀɴ ʙᴇʟɪ ᴍᴇʟᴀʟᴜɪ *${usedPrefix}buy limit*.`, m)
+                    continue; }// Limit habis
                 let extra = {
                     match,
                     usedPrefix,
@@ -161,16 +193,68 @@ module.exports = {
                     m,
                     users,
                     isGroup,
-                    isAdmin
+                    isAdmin,
+                    isPrems
                 };
                 try {
                     await plugin.call(this, m, extra);
-                } catch (e) {
-                    console.log(e);
+                    if (!isPrems) m.limit = m.limit || plugin.limit || false
+                } catch (e) { 
+                    m.error = e
+                   console.error(e)
+                    if (e) {  // Jika terjadi error Kode
+                        let text = format(e)
+                        for (let [jid] of global.owner.filter(([number, _, isDeveloper]) => isDeveloper && number)) {
+                        m.reply(`Fitur ERROR, laporkan Pemilik BOT. \n*🗂️ Plugin:* ${m.plugin}\n*👤 Pengirim:* ${(isGroup ? m.author : m.from).replace('@c.us','')}\n*💬 Chat Owner:* https://wa.me/${jid}\n*💻 Command:* ${usedPrefix}${command} ${args.join(' ')}\n📄 *Error Logs:*\n\n\`\`\`${text}\`\`\``.trim())
+                        }
+                    }
+                } finally {
+                    if (typeof plugin.after === 'function') {
+                        try {
+                            await plugin.after.call(this, m, extra)
+                        } catch (e) {
+                            console.error(e)
+                        }
+                    }
+                    if (m.limit)
+                        m.reply(+m.limit + " ʟɪᴍɪᴛ ᴛᴇʀᴘᴀᴋᴀɪ ✔️");
                 }
-                }
+                break
             }
+            }
+        } catch (e) {
+            console.error(e)
         } finally {
+            let user, stats = global.db.data.stats
+            if (m) {
+                if (users.number && (user = global.db.data.users[m.author || m.from])) {
+                    user.exp += m.exp
+                    user.limit -= m.limit * 1
+                }
+    
+                
+                if (m.plugin) {
+                        if (!isNumber(stats.total))
+                            stats.total = 0
+                        if (!isNumber(stats.success))
+                            stats.success = 0
+                        if (!isNumber(stats.failed))
+                            stats.failed = 0
+                    } else {
+                        stats = {
+                            total: 0,
+                            success: 0,
+                            failed: 0
+                        }
+                    }
+                    stats.total += 1
+                    if (m.error == null) {
+                        stats.success += 1
+                    } else {
+                        stats.failed += 1
+                    }
+                
+            }
             // Hasil dilihat pada console.log
             require("./lib/print")(this, m).catch((e) => console.log(e));
         }
@@ -197,7 +281,7 @@ global.dfail = (type, m, conn) => {
   }
 
 // Jangan dihapus nanti kodingan di disini ga bisa update realtime ketika di save.
-let file = require.resolve(__filename)
+let file = require.resolve('./handler.js')
 fs.watchFile(file, () => {
   fs.unwatchFile(file)
   console.log(chalk.redBright("Update 'handler.js'"))
