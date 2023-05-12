@@ -23,18 +23,28 @@ global.gcofc = 'https://chat.whatsapp.com/JKdIWr5fj990Ux2oqTjTo5' // GC resmi BE
 global.rpg = 'https://chat.whatsapp.com/CxIlUZlW3lD7eH4LLLWYoZ' // GC untuk main Game RPG
 global.rpg2 = 'https://chat.whatsapp.com/C4Qax9BYH9Q2DbFeRQRmRD' // GC untuk main Game RPG 2
 
+/*============== DATA ==============*/
 global.owner = [
     // [nomor kamu, nama kamu, developer bukan?]
     ["62895375950107", "berkahesport", true],
 ]
 
 global.sticker = {
-  packname: "nama packname stikermu",
-  author: "nama kamu"
+  packname: "BerkahEsport.ID", // Isi aja terserah.
+  author: "@moexti" //Isi aja nama kamu.
+}
+/*============== REST API ==============*/
+global.API = (name, path = '/', query = {}, apikeyqueryname) => (name in global.RestAPI ? global.RestAPI[name].website : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? apikeyqueryname ? { [apikeyqueryname]: global.RestAPI[name].apikey } : {} : 'gggg') })) : '')
+
+/*  CARA PAKAI
+let json = await ( await fetch(global.API(`zen`,`api/morensfw/ero`,{},`apikey`))).buffer()
+*/
+global.RestAPI = {
+  lolhuman: { website: 'https://api.lolhuman.xyz/', apikey: '9b817532fadff8fc7cb86862'},
+  //Tambahin kalo perlu.
 }
 
-
-//------ JANGAN DIUBAH -----
+/*============== JANGAN DIUBAH ==============*/
 let file = require.resolve(__filename);
 let fs = require('fs');
 let chalk = require('chalk');

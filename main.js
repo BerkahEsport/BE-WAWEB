@@ -93,7 +93,8 @@ Object.freeze(global.reload);
 // <----- Prefix BOT ----->
 global.prefix = new RegExp("^[" + "‎xzXZ/i!#$%+£¢€¥^°=¶∆×÷π√✓©®:;?&.\\-".replace(/[|\\{}()[\]^$+*?.\-\^]/g, "\\$&") + "]");
 
-
+// <----- Pake REST API ----->
+global.API = (situs, path = '/', query = {}, apikey) => (situs in global.RestAPI ? global.RestAPI[situs].website : situs) + path + (query || apikey ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikey ? { [apikey] : global.RestAPI[situs in global.RestAPI ? global.RestAPI[situs].apikey : situs] } : {}) })) : '')
 // <----- DATABASE BOT ----->
 var low
 try {
@@ -110,17 +111,12 @@ async function ClientConnect() {
     global.conn = new Client({
         authStrategy: new LocalAuth(),
         puppeteer: {
-            args: ["--no-sandbox", "--disable-gpu"]
+            args: ["--no-sandbox", "--disable-gpu"],
+            executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
+            // Ubah sesuai lokasi penginstalan chrome kamu. 
+            // (Jika tidak maka error, kalo mau jalanin hapus aja bagian executablePath. Tapi kamu ga bisa ngirim video!)
         }
     });
-/*    <===== KALO MAKE PANEL GANTI DIBAWAH INI PADA KODINGAN puppeter =====>
-puppeteer: {
-          args: ['--no-sandbox'],
-                  executablePath: platform() === 'win32' ? 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe' : '/usr/bin/google-chrome-stable'
-                      },
-                          userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 13_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15'
-                          });
-                          */
 
     // <----- Menghubungkan koneksi WAWEB ----->
     conn.on('loading_screen', (percent) => {
@@ -151,7 +147,7 @@ puppeteer: {
 
 }
 
-// Load database if database didn't load properly
+// // <----- Memuat Database BOT ----->
 loadDatabase()
 async function loadDatabase() {
   await global.db.read()
@@ -165,7 +161,7 @@ async function loadDatabase() {
   global.db.chain = _.chain(global.db.data)
 }
 
-// Save database every minute
+// // <----- Menyimpan database BOT ----->
 setInterval(async () =>{
   if (global.db) await global.db.write();
 }, 30 * 1000)

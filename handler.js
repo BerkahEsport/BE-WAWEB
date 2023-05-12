@@ -12,7 +12,7 @@ module.exports = {
         let users = await m.getContact();
         try {
 
-            // Fungsi Database
+            //  <----- Fungsi Database -----> Tambahin sendiri jika perlu.
             try {
                 let user = global.db.data.users[m.author || m.from]
                 if (typeof user !== 'object') global.db.data.users[m.author || m.from] = {}
@@ -125,13 +125,13 @@ module.exports = {
                 let _args = noPrefix.trim().split` `.slice(1);
                 let text = _args.join` `;
                 command = (command || "").toLowerCase();
-                let fail = plugin.fail || global.dfail // When failed
+                let fail = plugin.fail || global.dfail // <----- Jika ditolak ----->
                 let isAccept =
-                    plugin.command instanceof RegExp // RegExp Mode?
+                    plugin.command instanceof RegExp // <----- RegExp Mode tidak memakai Prefix ----->
                     ? plugin.command.test(command)
-                    : Array.isArray(plugin.command) // Array?
+                    : Array.isArray(plugin.command) // <----- Array ----->
                     ? plugin.command.some((cmd) =>
-                        cmd instanceof RegExp // RegExp in Array?
+                        cmd instanceof RegExp // <----- RegExp dalam Array ----->
                             ? cmd.test(command)
                             : cmd === command
                         )
@@ -142,7 +142,7 @@ module.exports = {
                 if (!isAccept) continue;
                 m.plugin = name;
       
-                // Fungsi untuk pengecualian akses plugin cmd
+                // // <----- Fungsi untuk pengecualian akses plugin Command ----->
                 if (plugin.rowner && !isROwner) {
                     fail('rowner', m, conn)
                     continue;
@@ -151,7 +151,7 @@ module.exports = {
                     fail('owner', m, conn)
                     continue;
                 }
-                if (plugin.premium && !isPrems) { // Premium
+                if (plugin.premium && !isPrems) {
                     fail('premium', m, this)
                     continue
                 }
@@ -173,14 +173,14 @@ module.exports = {
                 }
       
                 m.isCommand = true;
-                let xp = 'exp' in plugin ? parseInt(plugin.exp) : 3 // XP Earning per command
+                let xp = 'exp' in plugin ? parseInt(plugin.exp) : 3 // <----- EXP yang didapat per Command ----->
                 if (xp > 200)
-                    m.reply('ɴɢᴇᴄɪᴛ -_-') // Hehehe
+                    m.reply('ɴɢᴇᴄɪᴛ -_-') // // <----- Jika EXP didapat melebihi 200 ----->
                 else
                     m.exp += xp
                 if (!isPrems && plugin.limit && global.db.data.users[m.author || m.from].limit < plugin.limit * 1) {
                     this.reply(m.chat, `[❗] ʟɪᴍɪᴛ ᴀɴᴅᴀ ʜᴀʙɪꜱ, ꜱɪʟᴀʜᴋᴀɴ ʙᴇʟɪ ᴍᴇʟᴀʟᴜɪ *${usedPrefix}buy limit*.`, m)
-                    continue; }// Limit habis
+                    continue; }// // <----- Jika limit habis ----->
                 let extra = {
                     match,
                     usedPrefix,
@@ -263,7 +263,7 @@ module.exports = {
 
 
 global.dfail = (type, m, conn) => {
-    //let gambar =  MessageMedia.fromUrl(akses_ditolak)
+    let gambar =  MessageMedia.fromFilePath('./src/access_ditolak.jpg')
     let msg = {
       rowner: "*𝕂ℍ𝕌𝕊𝕌𝕊 𝔻𝔼𝕍𝔼𝕃𝕆ℙ𝔼ℝ* • ᴄᴏᴍᴍᴀɴᴅ ɪɴɪ ʜᴀɴʏᴀ ᴜɴᴛᴜᴋ ᴅᴇᴠᴇʟᴏᴘᴇʀ ʙᴏᴛ",
       owner: "*𝕂ℍ𝕌𝕊𝕌𝕊 𝕆𝕎ℕ𝔼ℝ* • ᴄᴏᴍᴍᴀɴᴅ ɪɴɪ ʜᴀɴʏᴀ ᴜɴᴛᴜᴋ ᴏᴡɴᴇʀ ʙᴏᴛ",
@@ -277,11 +277,11 @@ global.dfail = (type, m, conn) => {
       nsfw: `*ℙ𝔸ℝ𝔸ℍ 𝕃𝕌!!!* • ɴᴀᴋ ᴋᴀᴍᴜ ʙᴇʟᴜᴍ ᴄᴜᴋᴜᴘ ᴜᴍᴜʀ. ᴊᴀɴɢᴀɴ ᴍᴀᴋꜱᴀ!!!`,
       text: `*𝕋𝔼𝕂𝕊 𝕃𝕀𝕄𝕀𝕋𝔼𝔻* • ᴛᴇᴋꜱ ʏᴀɴɢ ᴋᴀᴍᴜ ᴍᴀꜱᴜᴋᴋᴀɴ ᴛᴇʀʟᴀʟᴜ ʙᴀɴʏᴀᴋ! ᴍᴀᴋꜱ. 1500 ᴋᴀʀᴀᴋᴛᴇʀ. ` 
     }[type];
-    if (msg) return conn.sendMessage(m.from, msg) //conn.sendMessage(m.from,  gambar, {caption: msg})
+    if (msg) return conn.sendMessage(m.from,  gambar, {caption: msg}) // conn.sendMessage(m.from, msg) 
   }
 
 // Jangan dihapus nanti kodingan di disini ga bisa update realtime ketika di save.
-let file = require.resolve('./handler.js')
+let file = require.resolve(__filename)
 fs.watchFile(file, () => {
   fs.unwatchFile(file)
   console.log(chalk.redBright("Update 'handler.js'"))

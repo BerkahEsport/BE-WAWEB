@@ -3,12 +3,13 @@ let path = require('path')
 let tags = {
   'main': 'MENU UTAMA',
   'anime': 'ANIME',
+  'downloader': 'UNDUHAN',
   'group': 'GROUP',
-  'info': 'INFO',
   'tools': "PERALATAN",
+  'info': 'INFO',
   'owner': 'OWNER BOT',
   'advanced': 'LANJUTAN',
-  '': 'LAIN = LAIN',
+  '': 'LAIN - LAIN',
 
 }
 const defaultMenu = {
