@@ -194,8 +194,7 @@ module.exports = {
                     users,
                     isGroup,
                     isAdmin,
-                    isPrems,
-                    teskode
+                    isPrems
                 };
                 try {
                     await plugin.call(this, m, extra);
