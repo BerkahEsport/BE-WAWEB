@@ -2,7 +2,7 @@ require('./config.js');
 let fs = require('fs')
 let { format } = require('util')
 const chalk = require('chalk');
-const pkg = require('whatsapp-web.js')
+const pkg = require('whatsapp-web.js');
 const { MessageMedia } = pkg
 var isNumber = x => typeof x === 'number' && !isNaN(x);
 module.exports = {
@@ -141,7 +141,7 @@ module.exports = {
         
                 if (!isAccept) continue;
                 m.plugin = name;
-      
+
                 // // <----- Fungsi untuk pengecualian akses plugin Command ----->
                 if (plugin.rowner && !isROwner) {
                     fail('rowner', m, conn)
@@ -194,7 +194,8 @@ module.exports = {
                     users,
                     isGroup,
                     isAdmin,
-                    isPrems
+                    isPrems,
+                    teskode
                 };
                 try {
                     await plugin.call(this, m, extra);
@@ -280,14 +281,7 @@ global.dfail = (type, m, conn) => {
     if (msg) return conn.sendMessage(m.from,  gambar, {caption: msg}) // conn.sendMessage(m.from, msg) 
   }
 
-// Jangan dihapus nanti kodingan di disini ga bisa update realtime ketika di save.
-let file = require.resolve(__filename)
-fs.watchFile(file, () => {
-  fs.unwatchFile(file)
-  console.log(chalk.redBright("Update 'handler.js'"))
-  delete require.cache[file]
-  require(file)
-})
+
   // <----- BERKAHESPORT.ID OFC ----->>
 /* Whatsapp bot versi WAWEB ini mohon digunakan dengan bijak
 Terimakasih Untuk ALLAH S.W.T.

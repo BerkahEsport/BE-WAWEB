@@ -1,8 +1,7 @@
 let handler = async (m, { conn, text }) => {
     let tes = `Halo kamu berhasil tes kode.... ^_^` // Isi aja sesuai keinginanmu.
-        m.reply(`${tes}`) // Membalas langsung ke penerima.
+        m.reply(tes) // Membalas langsung ke penerima.
         //conn.reply(m.from, tes) // Kalo mau mengirim ke nomor lain ganti m.from dengan nomor yang dituju (@c.us)
-    
     
     }
     handler.help = [''] // Jika diisi maka di menu bot akan tampil, samakan dengan handler.command ya.
@@ -13,4 +12,5 @@ let handler = async (m, { conn, text }) => {
     // handler.group = true // Hanya bisa diakses di group
     // handler.owner = true // Hanya bisa diakses oleh admin group
     // handler.botAdmin = true // Hanya bisa diakses jika bot menjadi Admin group.
+    // handler.limit = true // Limit akan berkurang 1 setiap menjalankan fitur. [kata true bisa diganti angka sesuai keinginan misal 5]
     module.exports = handler

@@ -33,14 +33,18 @@ global.sticker = {
   packname: "BerkahEsport.ID", // Isi aja terserah.
   author: "@moexti" //Isi aja nama kamu.
 }
-/*============== REST API ==============*/
-global.API = (name, path = '/', query = {}, apikeyqueryname) => (name in global.RestAPI ? global.RestAPI[name].website : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? apikeyqueryname ? { [apikeyqueryname]: global.RestAPI[name].apikey } : {} : 'gggg') })) : '')
 
+/*============== SITUS REST API ==============*/
 /*  CARA PAKAI
-let json = await ( await fetch(global.API(`zen`,`api/morensfw/ero`,{},`apikey`))).buffer()
+// https://api.lolhuman.xyz/api/instagram?apikey=sgwn&url=https://www.instagram.com/p/CU0MhPjBZO2/
+let json = await ( await fetch(global.API(`lolhuman`,`api/instagram`,`apikey`, `url=${text})))
+
+//https://api.lolhuman.xyz/api/stalkig/moexti?apikey=sgwn
+let json =  await ( await fetch(global.API(`lolhuman`,`api/stalkig`, text, 'apikey')))
 */
 global.RestAPI = {
-  lolhuman: { website: 'https://api.lolhuman.xyz/', apikey: '9b817532fadff8fc7cb86862'},
+  lolhuman: { website: 'https://api.lolhuman.xyz/', apikey: 'sgwn'},
+  xnzsenpai: { website: 'http://xznsenpai.xyz/', apikey: ''}
   //Tambahin kalo perlu.
 }
 

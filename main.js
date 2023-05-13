@@ -94,7 +94,17 @@ Object.freeze(global.reload);
 global.prefix = new RegExp("^[" + "‎xzXZ/i!#$%+£¢€¥^°=¶∆×÷π√✓©®:;?&.\\-".replace(/[|\\{}()[\]^$+*?.\-\^]/g, "\\$&") + "]");
 
 // <----- Pake REST API ----->
-global.API = (situs, path = '/', query = {}, apikey) => (situs in global.RestAPI ? global.RestAPI[situs].website : situs) + path + (query || apikey ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikey ? { [apikey] : global.RestAPI[situs in global.RestAPI ? global.RestAPI[situs].apikey : situs] } : {}) })) : '')
+/** @type {(name: string, path: string, query: { [Key: string]: any }, apikeyqueryname: string) => string} */
+global.API = (name, path = "/", query = {}, apikeyqueryname) =>
+  (name in global.RestAPI ? global.RestAPI[name].website : name)
+  + path + 
+  (query === `apikey`  ? `?apikey=${global.RestAPI[name].apikey}&${apikeyqueryname}` : 
+  (query || apikeyqueryname ? "?" + new URLSearchParams(Object.entries( 
+  {...query, ...(apikeyqueryname ? { [apikeyqueryname]: 
+  (name in global.RestAPI ? global.RestAPI[name].apikey : name)
+  } : {})})) : '' ))
+
+
 // <----- DATABASE BOT ----->
 var low
 try {
