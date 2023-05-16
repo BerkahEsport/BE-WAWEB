@@ -4,6 +4,8 @@ let { format } = require('util')
 const chalk = require('chalk');
 const pkg = require('whatsapp-web.js');
 const { MessageMedia } = pkg
+
+const { toAudio, toPTT, toVideo } = require('./lib/konversi.js')
 var isNumber = x => typeof x === 'number' && !isNaN(x);
 module.exports = {
     async handler(m) {

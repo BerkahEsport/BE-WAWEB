@@ -139,6 +139,17 @@ async function ClientConnect() {
         logger.info("Scan QR Code di atas agar terhubung ke WaWeb...");
     });
 
+    // <----- Sedang memverifikasi WhatsappWEB----->
+    conn.on('authenticated', () => {
+      logger.info("Verifikasi BOT WAWEB...");
+  });
+    
+  // Jika gagal verifikasi maka kita koneksikan ulang ----->
+    conn.on('auth_failure', msg => {
+    ClientConnect()
+    loadDatabase()
+  });
+
     // <----- BOT sudah terhubung ke Whatsapp ----->
     conn.on('ready', async () => {
         if (global.db.data == null) await loadDatabase();
