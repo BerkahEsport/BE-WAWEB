@@ -3,7 +3,7 @@ let handler = async (m, { conn, usedPrefix, command, args, text }) => {
 	if (m.hasQuotedMsg) await user.push((await m.getQuotedMessage()).author)
 	if (user.length === 0) return m.reply(`Sebutkan orangnya ${usedPrefix + command} @user`);
 	let chat = await m.getChat();
-	await chat.promoteParticipants(user)
+	await chat.promoteParticipants(user).then(() => m.reply(`Berhasil menjadi admin.`))
 }
 
 handler.help = ['promote'].map(v => v + ' [@tag]')

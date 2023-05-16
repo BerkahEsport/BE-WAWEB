@@ -3,7 +3,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 	if (quotedMsg && quotedMsg.hasMedia) {
 		const chat = await m.getChat()
 		let attachmentData = await quotedMsg.downloadMedia();
-		await chat.setPicture(attachmentData)
+		await chat.setPicture(attachmentData).then(() => m.reply(`Berhasil mengganti gambar group.`))
 	} else return m.reply(`Sertakan gambar dan beri command ${usedPrefix + command}`)
 }
 

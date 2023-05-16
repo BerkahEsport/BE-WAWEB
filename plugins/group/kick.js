@@ -3,7 +3,7 @@ let handler = async (m, { conn, usedPrefix, command, args, text }) => {
 	if (m.hasQuotedMsg) await user.push((await m.getQuotedMessage()).author)
 	if (user.length === 0) return m.reply(`Sebutkan orangnya ${usedPrefix + command} @user`);
 	let chat = await m.getChat();
-	await chat.removeParticipants(user)
+	await chat.removeParticipants(user).then(() => m.reply(`Berhasil mengeluarkan member.`))
 }
 
 handler.help = ['kick'].map(v => v + ' [@tag]')
