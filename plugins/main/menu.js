@@ -1,15 +1,17 @@
 let fs = require('fs')
 let path = require('path')
 let tags = {
-  'main': 'MENU UTAMA',
-  'anime': 'ANIME',
-  'downloader': 'UNDUHAN',
-  'group': 'GROUP',
-  'tools': "PERALATAN",
-  'info': 'INFO',
-  'owner': 'OWNER BOT',
-  'advanced': 'LANJUTAN',
-  '': 'LAIN - LAIN',
+  'main': 'ᴍᴇɴᴜ ᴜᴛᴀᴍᴀɴᴇ',
+  'anime': 'ᴀɴɪᴍᴇ',
+  'downloader': 'ᴜɴᴅᴜʜᴀɴ',
+  'group': 'ɢʀᴏᴜᴘ',
+  'tools': 'ᴘᴇʀᴀʟᴀᴛᴀɴ',
+  'image': 'ɢᴀᴍʙᴀʀ',
+  'maker': 'ɢᴀᴡᴇ ɢᴀᴍʙᴀʀ',
+  'info': 'ɪɴꜰᴏ',
+  'owner': 'ꜱɪɴɢ ᴅᴜᴡᴇ ʙᴏᴛ',
+  'advanced': 'ꜱᴇʀᴠᴇʀ',
+  '': 'ʟɪʏᴀɴᴇ',
 
 }
 const defaultMenu = {

@@ -9,7 +9,7 @@ const { toAudio, toPTT, toVideo } = require('./lib/konversi.js')
 var isNumber = x => typeof x === 'number' && !isNaN(x);
 module.exports = {
     async handler(m) {
-        if (!m) return;
+        //if (!m) return;
         let chats = await m.getChat();
         let users = await m.getContact();
         try {
