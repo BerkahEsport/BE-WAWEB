@@ -36,15 +36,15 @@ global.sticker = {
 
 /*============== SITUS REST API ==============*/
 /*  CARA PAKAI
-// https://api.lolhuman.xyz/api/instagram?apikey=sgwn&url=https://www.instagram.com/p/CU0MhPjBZO2/
-let json = await ( await fetch(global.API(`lolhuman`,`api/instagram`,`apikey`, `url=${text})))
+// https://https://api-be.berkahesport.repl.co/api/yutub/search?text=Berkahesport&apikey=beta
+let json = await ( await fetch(global.API(`apibe`,`api/instagram`,`apikey`, `text=${text})))
 
-//https://api.lolhuman.xyz/api/stalkig/moexti?apikey=sgwn
-let json =  await ( await fetch(global.API(`lolhuman`,`api/stalkig`, text, 'apikey')))
+//https://https://api-be.berkahesport.repl.co/api/stalkig/moexti?apikey=beta
+let json =  await ( await fetch(global.API(`apibe`,`api/stalkig`, text, 'apikey')))
 */
 global.RestAPI = {
-  lolhuman: { website: 'https://api.lolhuman.xyz/', apikey: 'sgwn'},
-  xnzsenpai: { website: 'http://xznsenpai.xyz/', apikey: ''}
+  apibe: { website: 'https://api-be.berkahesport.repl.co/', apikey: 'beta'},
+  skizo: { website: 'http://skizo.tech/', apikey: ''}
   //Tambahin kalo perlu.
 }
 
